@@ -12,41 +12,30 @@ class App extends React.Component {
     };
   }
 
-  // handleSearchTerm(term) {
-  //   const response = fetch(
-  //     `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=Ipet2Zb55TIIVhs3tkohzJgAvztgq2UL`
-  //   );
-  // }
-  //
-  // async handleSearchTerm(term) {
-  //   try {
-  //     const response = await fetch(
-  //       `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=Ipet2Zb55TIIVhs3tkohzJgAvztgq2UL`
-  //     );
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  //
-  // async componentDidMount() {
-  //   try {
-  //     const response = await this.handleSearchTerm();
-  //     const data = await response.data();
-  //     this.setState({
-  //       gifs: data
-  //     });
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async gettingGifs(searchTerm) {
+    try {
+      const response = await fetch(
+        `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=Ipet2Zb55TIIVhs3tkohzJgAvztgq2UL&limit=3`
+      );
+
+      const data = await response.json();
+      this.setState({
+        gifs: data
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  componentDidMount() {
+    this.gettingGifs("");
+  }
 
   render() {
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar onChange={searchTerm => this.gettingGifs(searchTerm)} />
+        <GifContainer gifs={this.state.gifs.data} />
       </div>
     );
   }
