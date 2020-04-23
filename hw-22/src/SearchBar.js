@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 
 class SearchBar extends React.Component {
   constructor() {
@@ -18,14 +19,17 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <h2>Search for a gif!</h2>
+      <div className="SearchBar-div">
+        <div className="SearchBar-header">
+          <h2>Search For Gifs!</h2>
+          <small>Simple React/API project created by Taiga Lee</small>
+        </div>
         <input
           type="text"
           placeholder="Search GIFs"
           onChange={event => this.handleSearchBarInput(event.target.value)}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }
