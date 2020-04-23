@@ -1,11 +1,29 @@
 import React from "react";
+import GifContainer from "./GifContainer";
 
 class SearchBar extends React.Component {
   constructor() {
     super();
+
+    this.gifsList = [];
+
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      gifs: []
     };
+  }
+
+  async handleSearchTerm(term) {
+    try {
+      const response = await fetch(
+        `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=Ipet2Zb55TIIVhs3tkohzJgAvztgq2UL`
+      );
+      const data = await response.json();
+      this.gifsList = data;
+      console.log(this.gifsList);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   handleSubmit = event => {
@@ -19,7 +37,7 @@ class SearchBar extends React.Component {
     this.setState({
       searchTerm: searchTerm
     });
-    this.props.handleSearchTerm(searchTerm);
+    this.handleSearchTerm();
   };
 
   render() {
@@ -29,6 +47,7 @@ class SearchBar extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleInputChange} />
         </form>
+        {/* <GifContainer gifs={this.gifsList} /> */}
       </div>
     );
   }
