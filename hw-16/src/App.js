@@ -3,10 +3,14 @@ import "./App.css";
 import SearchBar from "./SearchBar";
 
 class App extends React.Component {
+  handleSearchTerm = searchTerm => {
+    console.log(searchTerm);
+  };
+
   render() {
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar handleSearchTerm={this.handleSearchTerm} />
       </div>
     );
   }
