@@ -25,9 +25,9 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="SearchBar-div">
+        <h2>Search Gifs!</h2>
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleInputChange} />
-          <button>Search</button>
         </form>
       </div>
     );
